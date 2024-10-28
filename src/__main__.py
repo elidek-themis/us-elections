@@ -141,7 +141,7 @@ nll_df = pd.DataFrame.from_dict(results, orient="index")
 nll_df.loc["US"] = nll_df.mean()
 democratic_df = nll_df.iloc[:, :num_conts]
 republican_df = nll_df.iloc[:, num_conts:]
-objs = objs=(democratic_df, republican_df)
+objs = (democratic_df, republican_df)
 nll_df = pd.concat(objs=objs, keys=("Democratic", "Republican"), axis=1)
 
 # %% [markdown]
@@ -164,9 +164,9 @@ for i, col in enumerate(columns):
     red_exp = exp_df.iloc[:, 1]
     
     numerator = blue_exp.sub(red_exp)
-    denumerator = blue_exp.add(red_exp)
+    denominator = blue_exp.add(red_exp)
 
-    exp_diff[col] = -numerator.div(denumerator)
+    exp_diff[col] = -numerator.div(denominator)
 
 exp_diff["avg"] = exp_diff.mean(axis=1)
 
@@ -193,11 +193,8 @@ abs_dif_disag = exp_diff.drop("US").apply(lambda x: x.add(results_2020)).abs()
 
 abs_pct_diff = pd.DataFrame(index=results_2020.index, columns=exp_diff.columns)
 
-ag_idx = (agreement == 1)
-abs_pct_diff[ag_idx] = abs_dif_ag[ag_idx]
-
-disag_idx = (agreement == 0)
-abs_pct_diff[disag_idx] = abs_dif_disag[disag_idx]
+abs_pct_diff[agreement == 1] = abs_dif_ag[agreement == 1]
+abs_pct_diff[agreement == 0] = abs_dif_disag[agreement == 0]
 
 mean = abs_pct_diff.mean()
 abs_pct_diff.loc["US"] = ["Average absolute % diff"] + [""] * len(columns)
