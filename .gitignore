@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+data/cb_2018_us_state_500k
+
+.env
