@@ -2,7 +2,7 @@ import os.path as osp
 from pathlib import Path
 from dataclasses import dataclass
 
-ROOT_PATH = Path(__file__).parent
+ROOT_PATH = Path(__file__).parent.parent
 SRC_PATH = osp.join(ROOT_PATH, "src")
 RESULTS_PATH = osp.join(ROOT_PATH, "results")
 
