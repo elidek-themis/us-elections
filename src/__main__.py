@@ -16,15 +16,15 @@ _ = load_dotenv()
 # %%
 class ElectionMessage():
     
-    def __init__(self, chat: Union[str, List[Dict]]) -> None:
+    def __init__(self, chat: Union[str, List]) -> None:
         self.chat = chat
     
-    def format(self, state) -> Union[str, List[Dict]]:
+    def format(self, state) -> Union[str, List]:
         
         if isinstance(self.chat, str):
             return self.chat.format(state=state)
         
-        elif isinstance(self.chat, List[Dict]):
+        elif isinstance(self.chat, List):
             chat = [dict(message) for message in self.chat]
             for message in chat:
                 if "{state}" in message["content"]:
@@ -35,11 +35,11 @@ class ElectionMessage():
         return str(self.chat)
 
 # %%
-def tokenize(tokenizer:AutoTokenizer, message: Union[str, List[Dict]]) -> torch.Tensor:
+def tokenize(tokenizer:AutoTokenizer, message: Union[str, List]) -> torch.Tensor:
     if isinstance(message, str):
         return tokenizer.encode(message, add_special_tokens=False, return_tensors="pt")
 
-    elif isinstance(message, List[Dict]):
+    elif isinstance(message, List):
         return tokenizer.apply_chat_template(
             conversation=message,
             continue_final_message=True,
@@ -49,7 +49,7 @@ def tokenize(tokenizer:AutoTokenizer, message: Union[str, List[Dict]]) -> torch.
 def continuation_loss(
     model:AutoModelForCausalLM,
     tokenizer:AutoTokenizer,
-    context: Union[str, List[Dict]],
+    context: Union[str, List],
     cont:str
     ) -> torch.Tensor:
     
