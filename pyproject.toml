@@ -8,16 +8,20 @@ packages = [{include = "src"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 torch = "2.3.1"
-transformers = "^4.45.2"
+transformers = {extras = ["sentencepiece"], version = "^4.46.2"}
 pandas = "^2.2.3"
 matplotlib = "^3.9.2"
 geopandas = "^1.0.1"
-ipykernel = "^6.29.5"
 python-dotenv = "^1.0.1"
 accelerate = "^1.0.1"
 lm-eval = "^0.4.5"
 autoawq = "^0.2.6"
 xlsxwriter = "^3.2.0"
+openpyxl = "^3.1.5"
+plotly = "^5.24.1"
+nbformat = "^5.10.4"
+ipykernel = "^6.29.5"
+protobuf = "^5.28.3"
 
 
 [build-system]

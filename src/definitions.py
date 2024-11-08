@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 ROOT_PATH = Path(__file__).parent.parent
 SRC_PATH = osp.join(ROOT_PATH, "src")
+DATA_PATH = osp.join(ROOT_PATH, "data")
 RESULTS_PATH = osp.join(ROOT_PATH, "results")
 
 @dataclass
